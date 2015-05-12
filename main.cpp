@@ -12,7 +12,23 @@ using namespace std;
 m o n e y
 */
 
-// dispite of so many 'for' it spent less than 1 sec. to find solution
+// dispite of so many 'for' it spent near 1 sec. to find solution
+
+template<typename S> inline S sum_div(S _s1, S _s2) {
+	return (_s1 + _s2) / 10;
+}
+
+template<typename S> inline S sum(S _s1, S _s2) {
+	return (_s1 + _s2) % 10;
+}
+
+template<typename S, typename...Args> inline S sum_div(S _s1, S _s2, Args ... _args) {
+	return (_s1 + _s2 + sum_div(_args...)) / 10;
+}
+
+template<typename S, typename...Args> inline S sum(S _s1, S _s2, Args ... _args) {
+	return (_s1 + _s2 + sum_div(_args...)) % 10;
+}
 
 int main() {
 
@@ -28,12 +44,12 @@ int main() {
 		for (d = 0; d != 10; ++d) {
 			for (y = 0; y != 10; ++y) {
 				for (e = 0; e != 10; ++e) {
-					if ((e + d) % 10 == y) {	// for optimization
+					if (sum(e, d) == y) {	// for optimization
 						for (r = 0; r != 10; ++r) {
 							for (n = 0; n != 10; ++n) {
-								if ((r + n + ((e + d) / 10)) % 10 == e) {	// for optimization
+								if (sum(r, n, d, e) == e) {	// for optimization
 									for (o = 0; o != 10; ++o) {
-										if (o + e + ((r + n + ((e + d) / 10)) / 10) == n % 10) {	// for optimization
+										if (sum(o, e, r, n, d, e) == n) {	// for optimization
 											set<unsigned> uniq{ m, o, r, e, s, n, d, y };
 											if (uniq.size() == 8) {	// digits should be different
 												more = m * 1000 + o * 100 + r * 10 + e;
