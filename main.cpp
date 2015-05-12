@@ -70,7 +70,6 @@ int main() {
 		}
 	}
 
-
 	for (const auto &a : results) {
 		cout << get<0>(a) << '\t' << get<1>(a) << '\t' << get<2>(a) << endl;
 	}
